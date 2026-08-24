@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Notícias Premiumz | Atualidade e Desporto</title>
+    
+    <meta name="description" content="Fique por dentro das últimas notícias sobre tecnologia, negócios, basquetebol e desporto motorizado.">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        :root {
+            --primary: #1a365d;
+            --accent: #d69e2e;
+            --text: #2d3748;
+            --light-bg: #f7fafc;
+            --white: #ffffff;
+            --gray: #718096;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--light-bg);
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        /* Cabeçalho */
+        header {
+            background-color: var(--white);
+            border-bottom: 3px solid var(--primary);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 15px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo span { color: var(--accent); }
+
+        /* Barra de Pesquisa com Lupa */
+        .search-box {
+            display: flex;
+            align-items: center;
+            background: var(--light-bg);
+            border: 1px solid #e2e8f0;
+            border-radius: 20px;
+            padding: 6px 15px;
+            width: 250px;
+        }
+
+        .search-box input {
+            border: none;
+            background: transparent;
+            outline: none;
+            font-size: 14px;
+            width: 100%;
+            color: var(--text);
+        }
+
+        .search-box i {
+            color: var(--gray);
+            cursor: pointer;
+        }
+
+        /* Menu de Categorias */
+        .category-nav {
+            background: #edf2f7;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .category-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 10px 20px;
+            display: flex;
+            gap: 15px;
+            overflow-x: auto;
+        }
+
+        .category-btn {
+            background: transparent;
+            border: none;
+            color: var(--primary);
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            padding: 6px 12px;
+            border-radius: 4px;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        .category-btn:hover, .category-btn.active {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Espaços Publicitários (AdSense) */
+        .ad-banner {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #edf2f7;
+            border: 1px dashed var(--gray);
+            padding: 15px;
+            text-align: center;
+            font-size: 12px;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Grelha de Notícias */
+        .main-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            min-height: 400px;
+        }
+
+        .news-card {
+            background: var(--white);
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 15px rgba(0,0,0,0.1);
+        }
+
+        .news-img-wrapper {
+            width: 100%;
+            height: 220px;
+            background-color: #e2e8f0;
+        }
+
+        .news-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .news-content {
+            padding: 20px;
+        }
+
+        .news-tag {
+            background: var(--primary);
+            color: var(--white);
+            padding: 4px 8px;
+            font-size: 11px;
+            text-transform: uppercase;
+            font-weight: 600;
+            border-radius: 4px;
+            display: inline-block;
+            margin-bottom: 10px;
+        }
+
+        .news-title {
+            font-size: 20px;
+            color: var(--primary);
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .news-excerpt {
+            color: var(--gray);
+            font-size: 14px;
+            margin-bottom: 15px;
+        }
+
+        /* Rodapé */
+        footer {
+            background-color: var(--primary);
+            color: var(--white);
+            padding: 40px 20px;
+            margin-top: 50px;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .footer-links a {
+            color: #cbd5e0;
+            text-decoration: none;
+            margin: 0 15px;
+            font-size: 14px;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+
+        .footer-socials {
+            display: flex;
+            gap: 25px;
+        }
+
+        .footer-socials a {
+            color: var(--white);
+            font-size: 24px;
+            transition: transform 0.2s, color 0.2s;
+        }
+
+        .footer-socials a:hover { transform: scale(1.15); }
+        .fa-instagram:hover { color: #E1306C; }
+        .fa-linkedin:hover { color: #0077B5; }
+        .fa-facebook:hover { color: #1877F2; }
+
+        .footer-copy {
+            font-size: 12px;
+            color: #a0aec0;
+        }
+
+        /* Janelas Modais */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            backdrop-filter: blur(4px);
+        }
+
+        .modal-content {
+            background: var(--white);
+            padding: 30px;
+            border-radius: 12px;
+            max-width: 700px;
+            width: 100%;
+            max-height: 85vh;
+            overflow-y: auto;
+            position: relative;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 15px;
+            right: 20px;
+            font-size: 28px;
+            cursor: pointer;
+            color: var(--gray);
+        }
+
+        .modal-img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            border-radius: 6px;
+            margin-bottom: 20px;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+
+    
+    <header>
+        <div class="nav-container">
+            
+            <a href="#" class="logo" onclick="history.scrollRestoration = 'manual'; window.scrollTo(0,0); window.location.reload(); return false;">INFO<span>PREMIUMZ</span></a>
+            
+            
+            <div class="search-box">
+                <input type="text" id="searchInput" placeholder="Pesquisar notícias..." onkeyup="searchNews()">
+                <i class="fas fa-search" onclick="searchNews()"></i>
+            </div>
+        </div>
+    </header>
+
+    
+    <nav class="category-nav">
+        <div class="category-container">
+            <button class="category-btn active" onclick="filterCategory('todos', this)">Todos</button>
+            <button class="category-btn" onclick="filterCategory('Tecnologia', this)">Tecnologia</button>
+            <button class="category-btn" onclick="filterCategory('Negócios', this)"></button>
+            <button class="category-btn" onclick="filterCategory('Desporto', this)">Desporto</button>
+            <button class="category-btn" onclick="filterCategory('Basquetebol', this)">Basquetebol</button>
+            <button class="category-btn" onclick="filterCategory('Motorizado', this)">Motorizado</button>
+        </div>
+    </nav>
+
+    
+    <div class="ad-banner">
+        <span>Banner </span>
+    </div>
+
+    
+    <main class="main-container" id="newsGrid">
+      
+    </main>
+
+   
+    <div class="ad-banner">
+        <span>Anú</span>
+    </div>
+
+    
+    <footer>
+        <div class="footer-container">
+            <div class="footer-links">
+                <a href="#" onclick="openModal('modal-termos')">Termos de Uso</a>
+                <span>•</span>
+                <a href="#" onclick="openModal('modal-privacidade')">Políticas de Privacidade</a>
+            </div>
+
+            <div class="footer-socials">
+                <a href="https://instagram.com" target="_blank" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="https://linkedin.com" target="_blank" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="https://facebook.com" target="_blank" aria-label="Facebook"><i class="fab fa-facebook"></i></a>
+            </div>
+
+            <div class="footer-copy">
+                &copy; 2026 INFOPREMIUMZ. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <div id="news-modal" class="modal" onclick="closeNews(event)">
+        <div class="modal-content">
+            <span class="close-modal" onclick="document.getElementById('news-modal').style.display='none'">&times;</span>
+            <div id="modal-news-body"></div>
+        </div>
+    </div>
+
+    <div id="modal-termos" class="modal" onclick="closeModalOnOutsideClick(event, 'modal-termos')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSpecificModal('modal-termos')">&times;</span>
+            <h2>Termos e Condições de Uso</h2><br>
+            <p>Bem-vindo ao INFOPREMIUMZ. Ao aceder ao nosso portal, concorda em cumprir integralmente estes termos de serviço, leis e regulamentos aplicáveis à distribuição de informação digital.</p>
+        </div>
+    </div>
+
+    <div id="modal-privacidade" class="modal" onclick="closeModalOnOutsideClick(event, 'modal-privacidade')">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeSpecificModal('modal-privacidade')">&times;</span>
+            <h2>Política de Privacidade e Cookies</h2><br>
+            <p>A sua privacidade é importante. Este website utiliza cookies da Google para recolha de métricas e personalização de anúncios com base nos seus interesses e histórico de navegação.</p>
+        </div>
+    </div>
+
+    <script>
+        // Base de Dados
+        const newsData = [
+            {
+                id: 1,
+                tag: "Tecnologia",
+                title: "Aceleração Exponencial do Progresso",
+                excerpt: "O ano de 2026 está a tornar-se como o período de maior mudação tecnológica da história do Mundo. As inovações que a meses pareciam pertencer a um filme de ficção científica estão agora integradas no dia-a-dia de indústrias, governos e cidadãos comuns.",
+                img: "https://images.pexels.com/photos/35303939/pexels-photo-35303939.jpeg",
+                text: " O ano de 2026 está a tornar-se como o período de maior mudação tecnológica da história do Mundo. As inovações que a meses pareciam pertencer a um filme de ficção científica estão agora integradas no dia-a-dia de indústrias, governos e cidadãos comuns. A velocidade do progresso tecnológico já move-se a um ritmo extra-Ordinario, impulsionada pela combinacao entre a Inteligência Artificial, o hardware e a robótica. No entanto, esta corrida rumo à eficiência e à automação total. As notícias da actualidade partilham o mesmo espaço entre as maravilhas das novas descobertas e os alertas sobre os perigos, sociais e de segurança digital que esta tecnologias trazem."
+            },
+
+            {
+                id: 1,
+                tag: "Tecnologia",
+                title: "As Grandes Inovações dos Últimos Meses",
+                excerpt: " Nos últimos meses, o foco do sistema tecnológico do Mundo gira em torno do lançamento dos modelos de IA generativa de quinta geração (Gen-IA 5).",
+                img: "https://images.pexels.com/photos/35570784/pexels-photo-35570784.jpeg",
+                text: " Nos últimos meses, o foco do sistema tecnológico do Mundo gira em torno do lançamento dos modelos de IA generativa de quinta geração (Gen-IA 5).  Diferentemente dos assistentes virtuais dos anos passados, que apenas processavam texto e imagens, as IA actuais operam de forma totalmente diferente e autónoma. Estas IA conseguem programar aplicações de software inteiras a partir de um comando, traduzir conversas em tempo real, gerir cadeias de distribuição complexas sem necessidade da presençã humana. Outro marco histórico, foi a comercialização dos primeiros chips de baterias de alta densidade para o mercado de consumo. Aplicada inicialmente a smartphones e a veículos elétricos de nova geração, a tecnologia permite o carregamentos completos em poucos minutos e triplicou a vida útil dos componentes, dando um golpe duro da obsolescência programada das baterias de lítio. Na área da computação e segurança, os processadores e os sistemas quânticos comerciais começaram a ser integrados em grandes instituições , aumentando a capacidade de processamento a nives nunca antes vistos."
+            },
+
+
+
+           
+            {
+                id: 3,
+                tag: "Desporto",
+                title: " Identidade Tática e o Xadrez dos Treinadores",
+                excerpt: "O futebol da actualidade, como uma das indústrias de entretenimento e dinâmicas do planeta.",
+                img: "https://images.pexels.com/photos/8941576/pexels-photo-8941576.jpeg",
+                text: " O futebol da actualidade, como uma das indústrias de entretenimento e dinâmicas do planeta. La se vão os tempos em que o desporto-rei dependia da paixão regional ou da intuição dentro das quatro linhas. O sistema futebol antigo é gerido por algoritmos de scouting, com fundos de investimento multimilionários e uma cobertura inenterrupta que transformou as janelas de transferências autónoma, muitas vezes fascinante para os adeptos como os noventa minutos de jogo. Após um verão do marcado pelas emoções intensas do Campeonato do Mundo de 2026, os maiores clubes do mundo enfrentam uma reestruturação profunda, onde a gestão de activos financeiros ou dos jogadores e a filosofia dos treinadores ditam quem ficara no topo do futebol."
+            },
+
+            {
+                id: 3,
+                tag: "Desporto",
+                title: " as Grandes Transferências",
+                excerpt: " A actual janela de transferências de verão monstra que o poder económico entre a Premier League inglesa e o resto do continente europeu continua a expandir-se de forma sem precedentes. ",
+                img: "https://images.pexels.com/photos/38273821/pexels-photo-38273821.jpeg",
+                text: "A actual janela de transferências de verão monstra que o poder económico entre a Premier League inglesa e o resto do continente europeu continua a expandir-se de forma sem precedentes. Os clubes ingleses voltam a suprender com gastos Acumulados, impulsionados pelos novos contratos de direitos televisivos internacionais. Um dos maiores destaques o Arsenal, o actual campeão inglês, que foi a loucura neste mercado para garantir a contratação do médio brasileiro Bruno Guimarães, do Newcastle United, por uma quantia astronómica de mais de 60 milhões de libras. NUma clara de ambição e demostração do poder economico, os Gunners também asseguraram o defesa Ezri Konsa por mais 55 milhões e o jovem Piero Hincapié, consolidando a sua estrutura para defender o título. Por outro lado, o Chelsea mantém a sua filosofia de contratação sob as ordens de Xabi Alonso. O clube londrino garantiu a a contratação do jovem italiano lateral-direito, Marco Palestra, destingido como defesa do ano na Serie A pela Atalanta, numa transferencia de mais ou menos 47 milhões de libras. O Bayern de Munique foi atrás no mercado continental, para contratar ofensivo Marroquino Ismael Saibari, ex-PSV Eindhoven, por uma quantia de mais ou menos 43 milhões de libras, com um contrato até 2031. "
+            },
+
+
+            {
+                id: 4,
+                tag: "Basquetebol",
+                title: " A Era da Mudação Competitiva",
+                excerpt: " O basquetebol mundial atravessa uma das epocas mais dinâmicos e imprevisíveis na sua história. A modalidade deixou de ser previsíveis ou intocáveis.",
+                img: "https://images.pexels.com/photos/28776236/pexels-photo-28776236.jpeg",
+                text: "O basquetebol mundial atravessa uma das epocas mais dinâmicos e imprevisíveis na sua história. A modalidade deixou de ser previsíveis ou intocáveis. Tanto no palco mediático norte-americano da National Basketball Association (NBA) como na EuroLiga, o equilíbrio de forças está em  mudação. O fecho das janelas de mercado e as mais recentes transferências transformam por completo as metas e as projectos dos maiores clubes. Os Diretores desportivos e treinadores operam um autêntico xadrez financeiro e tático, onde uma única movimentação pode transformar uma equipa em crise numa candidata ao título, ou o contrario. "
+            },
+
+
+
+            {
+                id: 4,
+                tag: "Basquetebol",
+                title: " As Últimas Novidades da NBA",
+                excerpt: " As notícias mais recentes da NBA dão conta de uma revolução estrutural nas equipas candidatas a ser campeão.",
+                img: "https://images.pexels.com/photos/30986337/pexels-photo-30986337.jpeg",
+                text: " As notícias mais recentes da NBA dão conta de uma revolução estrutural nas equipas candidatas a ser campeão.  A actualidade do mercado mostrou que a cada vez menos dispostas a longos dos processos de construção através do Draft, preferindo avançar para garantir o successo imediato através de transferencias de superestrelas. Na Conferência Este, os New York Knicks mantêm-se no destaques, Após exibições convicentes, a nova-iorquina fechou o  mercado com uma transferencia bombástica para adicionar mais consistencia defensiva e poder de ataque exterior a sua equipe, numa tentativa clara de ser candidata ao titulo dos Boston Celtics. Os analistas desportivos prevem a estruturação a coloca os Knicks na posição de favorito. Esta estratégica visa dar estabilidade e suporte técnico ao jovem  Shai Gilgeous-Alexander, que procura assumir de forma o trono do Oeste."
+            },
+
+            
+            {
+                id: 5,
+                tag: "Motorizado",
+                title: "Mais do que Velocidade, um Laboratório de Inovação",
+                excerpt: "O desporto motorizado sempre foi e sempre sera muito mais do que uma simples competição de velocidade para determinar quem cruza a  meta em primeiro lugar. ",
+                img: "https://images.pexels.com/photos/33805408/pexels-photo-33805408.jpeg",
+                text: " O desporto motorizado sempre foi e sempre sera muito mais do que uma simples competição de velocidade para determinar quem cruza a  meta em primeiro lugar. Desde o inicio das corridas de automóveis, nos século passado, a pista tem sido um laboratório definitivo para a indústria de automóvel. Tecnologias que hoje encontramos nos nossos veículos de passageiros, como os travões de disco, aerodinâmica activa e até os sistemas de segurança passiva, foram melhorados devido a  competição. No entanto, o desporto motorizado nos dias de hoje enfrenta a maior mudanca da sua história, impulsionada pela necessidade urgente da conservacao ambiental, digitalização e pela mudança do perfil dos próprios adeptos do ano 2026."
+            },
+
+
+            {
+                id: 5,
+                tag: "Motorizado",
+                title: "A Transição e os Combustíveis do Futuro",
+                excerpt: "A grande narrativa na atualidade do desporto Motorizado gira em torno do carbono. Durante décadas, o rugido dos motores de combustão interna alimentados por combustíveis fósseis era o coração e a alma das corridas",
+                img: "https://images.pexels.com/photos/9568896/pexels-photo-9568896.jpeg",
+                text: "A grande narrativa na atualidade do desporto Motorizado gira em torno do carbono. Durante décadas, o rugido dos motores de combustão interna alimentados por combustíveis fósseis era o coração e a alma das corridas.   Contudo, as mudancas climática e as regulamentações  dos governo forçaram as federações internacionais a readaptarem-se. A Fórmula 1, estabeleceu uma meta ambiciosa de atingir a neutralidade de carbono (Net Zero) até 2030, e o ano de 2026 marca o início de uma nova e revolucao em regulamentar os nível dos motores."
+            },
+
+            {
+                id: 5,
+                tag: "Motorizado",
+                title: "  Mobilidade Elétrica e do Hidrogénio ",
+                excerpt: "As categorias tradicionais procuram salvar o motor térmico através da química sustentável, outroslado aceleram o processo da eletrificação pura",
+                img: "https://images.pexels.com/photos/33508506/pexels-photo-33508506.jpeg",
+                text:  " As categorias tradicionais procuram salvar o motor térmico através da química sustentável, outroslado aceleram o processo da eletrificação pura. Enquanto que a Fórmula E, já se encontra na sua maturidade tecnológica, continua a ultrapassar as barreiras da eficiência das baterias de alta Capacidade e dos sistemas de recarregamento de energia na travagem. Os dados recolhidos destas corridas urbanas são enviados quase em tempo real para os departamentos de desenvolvimento de veículos elétricos comerciais de marcas de renome. Paralelamente, o hidrogénio emerge na actualidade como a próxima grande fronteira para as competições de longa duração. O foco está agora voltado para as 24 Horas para o Campeonato do Mundo de Endurance (WEC), que estão a liderar a introdução de uma categoria dedicada a protótipos movidos a pilhas de combustível de hidrogénio e motores de combustão interna modificados para queimar hidrogénio gasoso. Esta abordagem resolve o maior obstáculo dos veículos elétricos a bateria nas corridas de resistência: o tempo prolongado necessário para o recarregamento, permitindo reabastecimentos em menos de um minuto."
+
+            }
+        ];
+
+        let currentCategory = 'todos';
+
+        function renderNews(data) {
+            const grid = document.getElementById('newsGrid');
+            grid.innerHTML = '';
+            
+            if(data.length === 0) {
+                grid.innerHTML = '<p style="grid-column:1/-1; text-align:center; color:var(--gray);">Nenhuma notícia encontrada.</p>';
+                return;
+            }
+
+            data.forEach(news => {
+                grid.innerHTML += `
+                    <article class="news-card" onclick="openNews(${news.id})">
+                        <div class="news-img-wrapper">
+                            <img src="${news.img}" alt="${news.title}" class="news-img">
+                        </div>
+                        <div class="news-content">
+                            <span class="news-tag">${news.tag}</span>
+                            <h2 class="news-title">${news.title}</h2>
+                            <p class="news-excerpt">${news.excerpt}</p>
+                        </div>
+                    </article>
+                `;
+            });
+        }
+
+        function filterCategory(category, button = null) {
+            currentCategory = category;
+            document.getElementById('searchInput').value = '';
+            
+            if(button) {
+                document.querySelectorAll('.category-btn').forEach(btn => btn.classList.remove('active'));
+                button.classList.add('active');
+            }
+
+            if(category === 'todos') {
+                renderNews(newsData);
+            } else {
+                const filtered = newsData.filter(item => item.tag === category);
+                renderNews(filtered);
+            }
+        }
+
+        function searchNews() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            
+            const filtered = newsData.filter(item => {
+                const matchesQuery = item.title.toLowerCase().includes(query) || item.text.toLowerCase().includes(query);
+                const matchesCategory = currentCategory === 'todos' || item.tag === currentCategory;
+                return matchesQuery && matchesCategory;
+            });
+            
+            renderNews(filtered);
+        }
+
+        function openNews(id) {
+            const news = newsData.find(item => item.id === id);
+            const modalBody = document.getElementById('modal-news-body');
+            
+            modalBody.innerHTML = `
+                <span class="news-tag">${news.tag}</span>
+                <h1 style="color:var(--primary); margin-bottom:15px; font-size:24px;">${news.title}</h1>
+                <img src="${news.img}" class="modal-img" alt="${news.title}">
+                <p style="font-size:16px; color:var(--text); text-align:justify; white-space:pre-line;">${news.text}</p>
+            `;
+            
+            document.getElementById('news-modal').style.display = 'flex';
+        }
+
+        function closeNews(e) {
+            if(e.target.id === 'news-modal') {
+                document.getElementById('news-modal').style.display = 'none';
+            }
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'flex'; }
+        function closeSpecificModal(id) { document.getElementById(id).style.display = 'none'; }
+        function closeModalOnOutsideClick(e, id) {
+            if(e.target.id === id) document.getElementById(id).style.display = 'none';
+        }
+
+        renderNews(newsData);
+    </script>
+</body>
+</html>
