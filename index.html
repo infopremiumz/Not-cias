@@ -1,615 +1,693 @@
 <!DOCTYPE html>
-<html lang="pt-MZ">
+<html lang="pt">
 <head>
-  
- 
-  
-  
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Infopremium - Notícias</title>
-    <!-- Meta tags para SEO e Redes Sociais (Essencial para Monetização) -->
-  
-
-  
-  
-  
-  
-  
-
-  
-  
-    <meta name="description" content="As últimas notícias de Moçambique e do mundo sobre Desporto, Tecnologia e muito mais.">
-    <meta property="og:title" content="MZ News - Portal de Notícias">
-    <meta property="og:description" content="Fique por dentro das atualizações em Moçambique.">
-    <meta property="og:type" content="website">
-<meta name="robots" content="index, follow">
+    <meta name="robots" content="index, follow">
     
-    
-    
-    <!-- Google Fonts & FontAwesome para Ícones -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
+  
+  <title>InfopremiumNoticias</title>
     <style>
-        /* --- ESTILOS GERAIS E RESPONSIVIDADE --- */
         :root {
-            --primary-color: #d32f2f;
-            --dark-color: #1a1a1a;
-            --light-color: #f4f4f4;
-            --text-color: #333;
+            --primary-color: #e81a1a;
+            --dark-color: #202124;
+            --light-bg: #f8f9fa;
+            --text-color: #3c4043;
+            --border-color: #dadce0;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Roboto', sans-serif;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--light-color);
+            background-color: var(--light-bg);
             color: var(--text-color);
-            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
         }
 
         header {
-            background-color: var(--dark-color);
-            color: white;
-            padding: 1rem;
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
         }
 
         .header-container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
+            padding: 15px 20px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 1rem;
+            gap: 15px;
         }
 
-        .logo h1 {
-            color: white;
-            cursor: pointer;
-            font-size: 1.8rem;
-        }
-
-        .logo span {
+        .logo {
+            font-size: 24px;
+            font-weight: 700;
             color: var(--primary-color);
+            text-decoration: none;
+            cursor: pointer;
         }
 
-        /* Barra de Pesquisa com Lupa */
         .search-box {
-            position: relative;
             display: flex;
             align-items: center;
+            background: var(--light-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 6px 14px;
+            width: 100%;
+            max-width: 300px;
         }
 
         .search-box input {
-            padding: 0.5rem 2rem 0.5rem 0.7rem;
-            border-radius: 4px;
             border: none;
+            background: transparent;
             outline: none;
-            width: 250px;
-            transition: width 0.3s;
+            width: 100%;
+            font-size: 14px;
+            color: var(--text-color);
         }
 
-        .search-box input:focus {
-            width: 300px;
+        .search-box svg {
+            width: 18px;
+            height: 18px;
+            fill: #5f6368;
+            margin-left: 8px;
         }
 
-        .search-box i {
-            position: absolute;
-            right: 10px;
-            color: #666;
-            cursor: pointer;
-        }
-
-        /* --- NAVEGAÇÃO / SEPARADORES --- */
         nav {
-            background-color: white;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            background: #ffffff;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .nav-tabs {
-            max-width: 1200px;
+        .nav-container {
+            max-width: 1100px;
             margin: 0 auto;
             display: flex;
-            list-style: none;
+            padding: 0 20px;
+            overflow-x: auto;
         }
 
-        .nav-tabs li {
-            padding: 1rem 1.5rem;
+        .nav-btn {
+            background: none;
+            border: none;
+            padding: 14px 20px;
+            font-size: 15px;
+            font-weight: 500;
+            color: #5f6368;
             cursor: pointer;
-            font-weight: bold;
             border-bottom: 3px solid transparent;
-            transition: 0.2s;
+            white-space: nowrap;
+            transition: all 0.2s ease;
         }
 
-        .nav-tabs li:hover, .nav-tabs li.active {
-            border-bottom: 3px solid var(--primary-color);
+        .nav-btn.active, .nav-btn:hover {
             color: var(--primary-color);
+            border-bottom-color: var(--primary-color);
         }
 
-        /* --- ESPAÇOS DE PUBLICIDADE (REQUISITO ADSENSE) --- */
-        .ad-space {
-            max-width: 1200px;
-            margin: 1rem auto;
-            background: #e0e0e0;
-            border: 1px dashed #999;
-            text-align: center;
-            padding: 15px;
-            font-size: 0.8rem;
-            color: #666;
-        }
-
-        /* --- FEED DE NOTÍCIAS --- */
         main {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 1rem;
+            max-width: 1100px;
+            width: 100%;
+            margin: 30px auto;
+            padding: 0 20px;
+            flex: 1;
         }
 
         .news-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 1.5rem;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
         }
 
-        .news-card {
-            background: white;
+        .card {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
             border-radius: 8px;
             overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
-            transition: transform 0.2s;
-            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+            transition: transform 0.2s, box-shadow 0.2s;
         }
 
-        .news-card:hover {
-            transform: translateY(-5px);
+        .card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
         }
 
-        .news-card img {
+        .card-img-wrapper {
             width: 100%;
             height: 200px;
+            background: #e8eaed;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #5f6368;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
             object-fit: cover;
         }
 
-        .news-content {
-            padding: 1rem;
-        }
-
-        .news-category {
-            font-size: 0.75rem;
+        .card-category {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background: var(--primary-color);
+            color: #ffffff;
+            font-size: 11px;
             text-transform: uppercase;
-            color: var(--primary-color);
-            font-weight: bold;
+            font-weight: 700;
+            padding: 4px 8px;
+            border-radius: 4px;
+            letter-spacing: 0.5px;
         }
 
-        .news-title {
-            font-size: 1.2rem;
-            margin: 0.5rem 0;
+        .card-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .card-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--dark-color);
+            margin-bottom: 10px;
+            line-height: 1.4;
+        }
+
+        .card-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #5f6368;
+            margin-bottom: 15px;
+        }
+
+        .full-text {
+            display: none;
+            margin-top: 10px;
+            padding-top: 10px;
+            border-top: 1px dashed var(--border-color);
+        }
+
+        .read-more-btn {
+            align-self: flex-start;
+            background: none;
+            border: none;
+            color: var(--primary-color);
+            font-size: 14px;
+            font-weight: 600;
+            cursor: pointer;
+            padding: 5px 0;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .read-more-btn:hover {
+            text-decoration: underline;
+        }
+
+        /* Seções de Páginas Legais */
+        .legal-section {
+            background: #ffffff;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 30px;
+            display: none;
+        }
+
+        .legal-section h2 {
+            margin-bottom: 20px;
             color: var(--dark-color);
         }
 
-        .news-summary {
-            font-size: 0.9rem;
-            color: #555;
+        .legal-section p {
+            margin-bottom: 15px;
+            line-height: 1.6;
+            font-size: 15px;
         }
 
-        /* --- CAIXAS DE DIÁLOGO (MODAIS) --- */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.7);
-            z-index: 1000;
-            justify-content: center;
-            align-items: center;
-            padding: 1rem;
-        }
-
-        .modal-content {
-            background: white;
-            max-width: 700px;
-            width: 100%;
-            max-height: 85vh;
-            overflow-y: auto;
-            border-radius: 8px;
-            padding: 2rem;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: #333;
-        }
-
-        .modal-body img {
-            width: 100%;
-            max-height: 350px;
-            object-fit: cover;
-            border-radius: 6px;
-            margin-bottom: 1rem;
-        }
-
-        /* --- RODAPÉ --- */
+        /* Footer e Bloco AdSense */
         footer {
-            background-color: var(--dark-color);
-            color: white;
+            background: #ffffff;
+            border-top: 1px solid var(--border-color);
+            margin-top: auto;
+        }
+
+        .adsense-footer-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
             text-align: center;
-            padding: 2rem 1rem;
-            margin-top: 3rem;
+            border-bottom: 1px solid var(--border-color);
         }
 
-        .footer-links {
-            margin-bottom: 1rem;
+        /* Estilo do Bloco de Anúncios do AdSense */
+        .adsense-footer-placeholder {
+            background: #fcf8e3;
+            border: 1px dashed #faf2cc;
+            color: #8a6d3b;
+            padding: 20px;
+            max-width: 728px;
+            margin: 0 auto;
+            font-size: 12px;
+            font-weight: 500;
+            border-radius: 4px;
         }
 
-        .footer-links a {
-            color: #bbb;
+        .footer-links-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            font-size: 14px;
+        }
+
+        .social-links a, .legal-links btn, .legal-links a {
+            color: #5f6368;
             text-decoration: none;
-            margin: 0 10px;
+            margin-left: 15px;
             cursor: pointer;
         }
 
-        .footer-links a:hover {
-            color: white;
+        .social-links a:hover, .legal-links a:hover {
+            color: var(--primary-color);
         }
 
-        /* --- RESPONSIVIDADE ADICIONAL PARA TELEMÓVEIS --- */
         @media (max-width: 600px) {
-            .header-container {
+            .header-container, .footer-links-container {
                 flex-direction: column;
+                text-align: center;
             }
-            .search-box, .search-box input {
-                width: 100%;
+            .search-box {
+                max-width: 100%;
             }
-            .search-box input:focus {
-                width: 100%;
-            }
-            .nav-tabs {
-                justify-content: space-around;
-            }
-            .nav-tabs li {
-                padding: 0.8rem 0.5rem;
-                font-size: 0.9rem;
+            .social-links a, .legal-links a {
+                margin: 0 8px;
             }
         }
     </style>
 </head>
 <body>
 
-    
     <header>
         <div class="header-container">
-           
-            <div class="logo" onclick="window.location.reload();">
-                <h1>Infopremium<span>Noticias</span></h1>
-            </div>
-            
+            <a class="logo" onclick="window.location.reload();"><h3>Infopremiumm<span>Noticias</span></h3></a>
             <div class="search-box">
-                <input type="text" id="searchInput" placeholder="Pesquisar notícias..." onkeyup="searchNews()">
-                <i class="fa-solid fa-magnifying-glass"></i>
+                <input type="text" placeholder="Pesquisar no site...">
+                <svg viewBox="0 0 24 24"><path d="M15.5 14h-.79l-.28-.27C15.41 12.59 16 11.11 16 9.5 16 5.91 13.09 3 9.5 3S3 5.91 3 9.5 5.91 16 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z"/></svg>
             </div>
         </div>
+
+
+
 
 <script src="https://pl31013129.profitableratecpmnetwork.com/74/b2/be/74b2be0937762452758dd219e17c09e0.js"></script>
 
-  
-
         
+      
     </header>
 
-    
     <nav>
-        <ul class="nav-tabs">
-          
-          
-           
-            <li class="logo" onclick="window.location.reload();">
-                <span>Início</span>
-            </li>
-          
-          
-          
-          
-          
-          
-            <li class="tab-item active" onclick="filterCategory('todos', this)">Todos</li>
-            <li class="tab-item" onclick="filterCategory('desporto', this)">Desporto</li>
-            <li class="tab-item" onclick="filterCategory('tecnologia', this)">Tecnologia</li>
-        </ul>
+        <div class="nav-container">
+            <button class="nav-btn active" onclick="filterCategory('todos', this)">Todos</button>
+            <button class="nav-btn" onclick="filterCategory('desporto', this)">Desporto</button>
+            <button class="nav-btn" onclick="filterCategory('tecnologias', this)">Tecnologias</button>
+        </div>
     </nav>
 
-    
-
-         
-  
-  <main>
-        <div class="news-grid" id="newsGrid">
-           
+    <main>
+        <!-- Feed de Notícias -->
+        <div id="news-feed" class="news-grid">
             
 
-<div style='position: fixed; bottom: 0; left: 0; width: 100%; z-index: 99999; text-align: center; background: rgba(0,0,0,0.8); line-height: 0;'>
-  
-</div>
+<!-- Artigo 14 - Tecnologias -->
 
 
+
+            <!-- Artigo 10 - Desporto -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                   
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEj6vQcNkjWl-JkNOPp4lAkfz_rX1f-JnpD0QFondmdEea0HirgdgKxb3UYEzMUp2-dLgH0RFOOVZdYx8oG8XZjreF1-N2CtC4ETu5u36h1o6Kp-B86xxBYcz7TwWvcXvz75alNG-Jp4Kxq5mSdz-EstptVs37Po71D4f57ELVoi1Vf5APAXrAQjYz7NE6A/s320/pexels-cruz-in-portugal-26448162.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title"> Portugal A Seleção das Quinas</h2>
+                    <div class="card-text">
+                        <p class="summary-text">Portugal vive um dos momentos mais fascinantes da sua história futebolística, caracterizado por uma superabundância de talento técnico que gera acesos debates táticos. Sob a liderança de Roberto Martínez, a equipa implementou um sistema tático dinâmico, alternando com facilidade entre defesas a três e a quatro elementos, valorizando a largura total do campo.</p>
+                        <div class="full-text">
+                            <p> Os resultados recentes nas campanhas de qualificação europeia e na Nations League revelam uma equipa com enorme veia goleadora, impulsionada por Bruno Fernandes, Bernardo Silva e as arrancadas de Rafael Leão. No entanto, o grande foco de debate continua a ser a transição geracional e a gestão dos minutos de Cristiano Ronaldo no onze inicial. Os jogos contra adversários de bloco defensivo hermético têm testado a paciência da equipa, que procura o equilíbrio perfeito entre honrar o maior legado da sua história e libertar a mobilidade fluida da nova geração de criativos .</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+
+
+
+<!-- Artigo 11 - Desporto -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                   
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhparHjGomTdicL2oEqNVpHIVdrFaC-zWDvajORULSF6nNGbY25RZ15t0R81iOzuR-btqm_zmGN-3pzFOtq7ckLAtIxywkp53gOUfc99bbLJ2nzbhkW4cl7S0AUgSbZ1ftHyejiQYt3TMSNUsPUtIida37N2r4vgHIKlvxOlro-p00HVuGY9sBH3iNWYBA/s320/pexels-boost-media-marketing-2156324299-38808791.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Inglaterra The Three Lions</h2>
+                    <div class="card-text">
+                        <p class="summary-text">A seleção inglesa entrou numa nova era pós-Gareth Southgate, procurando traduzir a imensa qualidade individual da Premier League em títulos internacionais expressivos. Jogadores de dimensão mundial como Jude Bellingham, Phil Foden, Bukayo Saka e o eterno finalizador Harry Kane compõem um dos ataques mais temidos do planeta.</p>
+                        <div class="full-text">
+                            <p>  Os resultados em jogos recentes mostram uma Inglaterra mais ofensiva e liberta das amarras táticas excessivamente conservadoras do passado. Contudo, os confrontos contra nações do primeiro escalão europeu expõem ainda debilidades na transição defensiva e na gestão do ritmo do meio-campo quando não têm a bola. A identidade atual está em construção, balançando entre o jogo posicional moderno e a tradicional intensidade física e vertical do futebol britânico..</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+
+
+ <!-- Artigo 13 - Desporto -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                   
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiFZ5HnQIXGO8bDXbzvM5QXR9QWfuaEnQXaghWNYv5P4-fnSCtdt7BDkJvOtYbkJuW7Xa2JU6u2RDHvJGd5_73IBzZ1BXc5rBLXLZ3DGQ-H9z2L7lbNmklaZLx05B_6RrpgnAv6N388EqkK9Rwr2gz7Fmm_qL1yBEspi7Zdlh367RC5WManP6ywZQ9iMbk/s320/pexels-jana-259137194-17038853.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title"> Croácia Vatreni</h2>
+                    <div class="card-text">
+                        <p class="summary-text">A Croácia desafia as leis do tempo e da demografia futebolística. Liderada pelo eterno e cerebral Luka Modric, a equipa mantém-se no topo do futebol europeu através de uma resiliência mental única e de um dos trios de meio-campo mais técnicos do mundo (Modric, Kovacic e Pasalic/Brozovic).</p>
+                        <div class="full-text">
+                            <p> Os seus jogos recentes mostram que, embora a equipa sinta dificuldades físicas nos minutos finais devido à veterania de algumas peças, a sua capacidade de gerir a bola sob pressão e levar os jogos para o prolongamento ou ritmos controlados é inigualável. Os resultados mantêm a Croácia altamente competitiva na Nations League, somando triunfos estratégicos baseados na paciência tática, circulação em "U" e eficácia máxima nas poucas oportunidades criadas. .</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+
+
+
+            
+
+
+
+
+
+
+
+            <!-- Artigo 1 - Desporto -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                   
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiv6fBQ4Wkv9NR_cHKbgozS2WK8bpAMUr0C5KfTchKUk5wrr23l_zJVI2mRn6dy2E4iv9bCx3Cj20jYGvrLbtGP88-BtXgKD44Pg5NfgEplmYPyzM2H-Xo1TXRdD-wC1L6wEeLkJ9q3lgwnAonRCERY01aGzzDGLhDlLi7NZrv1mnyVKhiMf3F7FIi6NN0/s320/pexels-waltc-18488235.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">Choques de Titãs e Afirmações Táticas</h2>
+                    <div class="card-text">
+                        <p class="summary-text">No Grupo A1, as atenções dividiram-se entre a reedição de rivalidades clássicas. A França deslocou-se à Turquia e carimbou uma vitória tangencial, mas estrategicamente fundamental, por 1-0 sobre a Seleção Turca. Num ambiente hostil e fervilhante,.</p>
+                        <div class="full-text">
+                            <p> os gauleses demonstraram uma solidez defensiva pragmática, controlandoas transições ofensivas do adversário e desferindo o golpe decisivo através de uma jogada coletiva de alta precisão. A Turquia, apesar de uma exibição corajosa e de ter pressionado até aos instantes finais, acabou prejudicada por uma expulsão aos 87 minutos, que quebrou o ímpeto da equipa e selou o triunfo francês. .</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+            <!-- Artigo 2 - Tecnologias -->
+            <article class="card" data-category="tecnologias">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhTac0brzave3rsw6FfaWYYifj19-CqrINZivX-rq-naOjE88C7uc6XYRNfptVGi0nx87c7b3ONxw9I4HJ6VBfViLWdftkvjyHQdUVPuYypeDeupYLNwcqdE08yVLfNucGtLmqcX1QO1Lf8Qd7-UiY94YsRU8pMOZidpgQiY1FOX_ClR4Ch3ttHqpbSo8I/s320/pexels-pngmariah-7649744.jpg">
+                    <span class="card-category">Tecnologias</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">A Era da Infraestrutura Invisível e Inteligente</h2>
+                    <div class="card-text">
+                        <p class="summary-text">A tecnologia de 2026 ultrapassou a barreira da mera automação para se consolidar como uma camada invisível, inteligente e omnipresente na infraestrutura da civilização moderna. Se no início da década assistimos à explosão conceptual da Inteligência Artificial generativa e à proliferação de protótipos de computação quântica, o ano corrente marca o ponto de viragem onde estas tecnologias saíram dos laboratórios de investigação para redefinir as fundações da economia global, da medicina de precisão, do planeamento urbano e da vida quotidiana..</p>
+                        <div class="full-text">
+                            <p>O propósito desta redação exaustiva é analisar as mais profundas e impactantes novidades tecnológicas de 2026, divididas estruturalmente em sete pilares fundamentais: a Inteligência Artificial e a Economia de Agentes Autónomos; a Computação Quântica Prática e Cibersegurança; as Interfaces Cérebro-Computador e Robótica Humanoide; a Revolução da Biotecnologia e Medicina Personalizada; a Computação Espacial e Dispositivos de Próxima Geração; as Novas Fronteiras de Energia Limpa e Sustentabilidade Computacional; e, por fim, os Desafios Éticos e Regulatórios que moldam este novo ecossistema mundial.</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+            
+
+
+
+
+ <!-- Artigo 4 - Tecnologias -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEgO_DO1NCA17nQea5udE41VDzozSMeyXv7mzgp9dJx1iguE7swDMmUbyPXTfAZEzr2h_EwpWrIYFj0U-YpieBfa5hGVCssrT8kFr50qMbnAUj6_G0p20eHlAkGAG-bVVwJofQQYhImaej4B5xB6ddGBHJ95YlpjwssDrF4NgdKAL1o7pqgvs6FHUcgmGA0/s320/pexels-ivy-nguyen-9041196-6201763.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">  No Grupo A1 a Bélgica </h2>
+                    <div class="card-text">
+                        <p class="summary-text">a Bélgica assinou uma das exibições mais categóricas da jornada ao vencer a Itália em solo transalpino por 2-0. Sob a batuta de uma nova geração que combina vigor físico com uma velocidade de transição estonteante, os diabos vermelhos expuseram as fragilidades na transição defensiva da Azzurra. Os italianos, ainda em processo de reformulação tática, abusaram da posse de bola estéril e foram castigados pela eficácia cirúrgica dos belgas, que assumem provisoriamente a liderança do grupo e enviam um sinal claro de que pretendem ser candidatos legítimos ao troféu.</p>
+                        <div class="full-text">
+                            <p></p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+ <!-- Artigo 5 - Tecnologias -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEg9Oo1WIXEjLpqJla348WX7ubcU7aopzLGjGULuxbHHbTGR1oX1mQBsvEW4wWuieYSQcAeFnTBtJ2LZX-qeMMBQHmK-gB-ZzLkgiAKIy4v7KbFAIJhN58HoyRMYwYyqaOW-yVnzQn7H1ap9obW3VSWjYagnuR59To2v1aHUODmWbvCs7FSYbIHR-VvWqn8/s5184/pexels-dave-lopez-861426-16130562.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">  Atletico de Madrid 2 - 1 Real Madrid</h2>
+                    <div class="card-text">
+                        <p class="summary-text">Num duelo emocionante no Estádio Wanda metropolitan, o AT Madrid garantiu três pontos vitais ao vencer por 2-1  o Real Madrid, O golo dramática e de Penalti deu inicio a construcao, do resultado da equipa da casa e fez o real sofre a pressão asfixiante sobre a saída de bola, a linha defensiva mostrou-se ausente da partida, que desenharam jogadas coletivas brilhantes. O resultado final de 2-1 reflete as fragilidades tatica e traz muitas duvidas a candidatura do Real Madrid para quebraro jeju do título, visto quando colocado a prova com equipas com mesma ambincao ou projectos semenhantes o Real nao consegue encontrar solucoes</p>
+                        <div class="full-text">
+                            <p></p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+
+
+
+ <!-- Artigo 7 - Tecnologias -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiYrfqFyZBZQQmI8nu6HFlnHUXDBysyHGw0ndv2_VUtFHllLxHHer8KT31YKvTlf4tLzojE5DqeRVNMG0e9MC_3huiGY52UQXT2ZDSi0O-sg5Ee7eaBzCdIWkx4yUPnlT8TAmnyGWkylZTaJI_VY42h0Fx8i_31lZw8yA6lYabMwgAV8P5MlRU-E0btaDw/s320/pexels-claudio-mota-105200226-9930672.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">  O clássico eterno entre a Holanda e a Alemanha</h2>
+                    <div class="card-text">
+                        <p class="summary-text">resultou num empate espetacular por 1-1. O confronto, pautado por uma intensidade física avassaladora e um xadrez tático fascinante a meio-campo, traduziu a igualdade de forças entre duas das escolas mais influentes do futebol mundial. A Holanda utilizou a largura do terreno para criar desequilíbrios, enquanto a Alemanha, com um pressing alto sufocante, forçou erros na saída de bola neerlandesa. No final, o empate acabou por ser o resultado mais justo, refletindo o equilíbrio técnico e as exibições inspiradas de ambos os guarda-redes. </p>
+                        <div class="full-text">
+                            <p> </p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+ <!-- Artigo 8 - Tecnologias -->
+            <article class="card" data-category="tecnologias">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src=" https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzpB1PGripAU8zdTMtqoiSUNxCjmcqU3uUhvhBY9idzar2Aq8VAnWsqZofFkr9U4IvG1nkr9mj5Aktfx03gOu74p2XnkvQ0k9_-w9WY0n_2Zz8Mfrc6t-x7B_KJL-wkQ5iJRWsEHYXVUzEP2kYQ4gMqpyg6iGKs5WMVKApWXyPzN-hK08EwZmlQOZnTnM/s320/pexels-jimbear-2105927.jpg">
+                    <span class="card-category">Tecnologias</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">  Computação Quântica Prática e o Imperativo Criptográfico</h2>
+                    <div class="card-text">
+                        <p class="summary-text">O ano de 2026 ficará registado na história da ciência de computação como o período em que a computação quântica alcançou a relevância comercial e utilidade prática, superando a fase de demonstração quântica académica. Os principais consórcios tecnológicos, estabilizaram computadores quânticos que operam na escala de milhares de qubits físicos com taxas de erro incrivelmente baixas, mitigadas por sistemas avançados de correção de erros quânticos de superfície.</p>
+                        <div class="full-text">
+                            <p>  Este avanço teve um impacto sísmico imediato na indústria farmacêutica e na ciência dos materiais. Pela primeira vez, simulações moleculares ao nível quântico estão a ser executadas para desenhar novos catalisadores químicos capazes de capturar dióxido de carbono diretamente da atmosfera com uma eficiência dez vezes superior aos métodos anteriores. Na medicina, a simulação detalhada do dobramento de proteínas complexas reduziu o tempo de descoberta de novos compostos antibióticos de anos para escassas horas. Contudo, esta capacidade quântica trouxe consigo a maior ameaça de sempre à segurança criptográfica global..</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+
+ <!-- Artigo 9 - Tecnologias -->
+            <article class="card" data-category="desporto">
+                <div class="card-img-wrapper">
+                    <img class="card-img" src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiHijrQzutuajq1DJHcFxTkMlJkZ0g9iqAyw39BcnLAmWlYVEtf6OXXfvlf2CnkbPNeeovf_2UJkRy3TYKFgzw25AP_q711L0VGoMlg7h1IAbLmHxYj8G58EwniKw41A1_l5pL0OLYFua3KntGwk2RG2J_cw4HsMszsHpYFZADZFiqnPowiHThhyg-ngzA/s320/pexels-messalaciulla-5265242.jpg">
+                    <span class="card-category">Desporto</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title">  O Empate entre Brasil e Austrália</h2>
+                    <div class="card-text">
+                        <p class="summary-text">A Seleção Brasileira iniciou um novo ciclo tático sob enorme escrutínio. Num amigável disputado em solo australiano (Queensland), o Brasil empatou 1-1 com a Austrália. O confronto serviu como um teste de fogo à capacidade de adaptação dos jogadores sul-americanos ao estilo de jogo intensamente físico, britânico e de constante pressão aérea praticado pelos "Socceroos". .</p>
+                        <div class="full-text">
+                            <p>O Brasil demonstrou rasgos de enorme qualidade técnica individual e períodos de excelente circulação de bola no meio-campo ofensivo, mas revelou as habituais fragilidades na transição defensiva e na proteção das bolas paradas laterais. A Austrália colocou-se em vantagem através de um cabeceamento fulgurante, aproveitando uma falha de marcação na grande área brasileira. A reação canarinha foi imediata e o empate surgiu na sequência de uma combinação rápida que furou o bloco defensivo australiano. Apesar das tentativas finais de ambas as equipas para desfazer a igualdade, o 1-1 permaneceu no marcador.</p>
+                        </div>
+                    </div>
+                    <button class="read-more-btn" onclick="toggleReadMore(this)">Ler mais &darr;</button>
+                </div>
+            </article>
+
+        </div>
+
+        <!-- Seções Legais Requisitadas pelo AdSense -->
+        <div id="privacy-policy" class="legal-section">
+            <h2>Política de Privacidade</h2>
+            <p>A sua privacidade é de extrema importância para nós. Esta política de privacidade documenta os tipos de informações pessoais que são recebidas e recolhidas pelo nosso portal e como são utilizadas.</p>
+            <p>Utilizamos cookies para armazenar informações sobre as preferências dos visitantes, registar informações específicas sobre as páginas que o utilizador acede ou visita e personalizar o conteúdo da página com base no tipo de navegador.</p>
+            <p><strong>Parceria Google:</strong> O Google, como fornecedor de terceiros, utiliza cookies para exibir anúncios neste site. Com o cookie DART, o Google pode exibir anúncios com base nas visitas feitas a este e a outros sites na Internet.</p>
+            <button class="read-more-btn" onclick="backToHome()">Voltar ao início</button>
+        </div>
+
+        <div id="terms-of-use" class="legal-section">
+            <h2>Termos e Condições de Uso</h2>
+            <p>Bem-vindo ao nosso portal. Ao aceder e utilizar este site, você concorda em cumprir e respeitar os seguintes termos e condições de uso.</p>
+            <p>O conteúdo das páginas deste site é para sua informação geral e uso exclusivo. Está sujeito a alterações sem aviso prévio. O uso não autorizado deste site pode dar origem a uma reclamação por danos ou ser uma infração penal.</p>
+            <button class="read-more-btn" onclick="backToHome()">Voltar ao início</button>
         </div>
     </main>
-  
-  
-   
-    
 
-    
-  
- 
     <footer>
-        <div class="footer-links">
-            <a onclick="openModal('privacy')">Política de Privacidade</a> | 
-            <a onclick="openModal('terms')">Termos e Condições</a>
-        </div>
-        <p>&copy; 2026 InfopremiumNoticias.</p>
-    </footer>
+        
+        <div class="adsense-footer-container">
+          
+     
+          
+   
+            
+            
+            
+            
+            
+            
+          
+          </div>
+            <!-- Insira o código de Bloco de Anúncio Nativo ou Responsivo do AdSense aqui -->
+            <div class="adsense-footer-placeholder">
+                <p></p>
+                <small>
+                    
 
-    
-    <div class="modal" id="globalModal">
-        <div class="modal-content">
-            <span class="close-modal" onclick="closeModal()">&times;</span>
-            <div id="modalBody" class="modal-body">
-                
+<!-- Contentor do Anúncio no Rodapé -->
+
+
+
+
+                </small>
             </div>
         </div>
-    </div>
+        
+        <div class="footer-links-container">
+            <p>&copy; 2026 InfopremiumNoticias. Todos os direitos reservados.</p>
+            <div class="legal-links">
+                <a onclick="showLegal('privacy-policy')">Política de Privacidade</a>
+                <a onclick="showLegal('terms-of-use')">Termos de Uso</a>
+            </div>
+            <div class="social-links">
+                <a href="#" target="_blank" rel="noopener">Facebook</a>
+                <a href="#" target="_blank" rel="noopener"></a>
+                <a href="#" target="_blank" rel="noopener"></a>
+            </div>
+        </div>
+    </footer>
 
     <script>
-       
-        const newsData = [
+        // Função para mostrar/ocultar a informação completa ("Ler mais")
+        function toggleReadMore(button) {
+            const cardContent = button.parentElement;
+            const fullText = cardContent.querySelector('.full-text');
             
-        
-        
-        {
-                id: 6,
-                category: "desporto",
-                title: "Elche 2 - 3 Real Madrid",
-                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEh4GtS7Tc4hYByckR-yE2FtT13e-Gp9yySt4SwcmJQUmU2KyuzXCXMPY4JQGxEmOlC1dp-2Y3ZYk6er8I7rDMalumu5608BupwTDbJ8ixxQOEoZG2Gw1ih9rp-rVOZe6DtP83JWeiQDEsudskYPy6BDA0YjsuvJJIahMEYQVSyVqTBetJYVtcD9Qz0Q4UY/s320/pexels-simonreza-10095952.jpg",
-                summary: "Num duelo emocionante no Estádio Manuel Martínez Valero, o Real Madrid garantiu três pontos vitais ao vencer por 3-2",
-                details: "Num duelo emocionante no Estádio Manuel Martínez Valero, o Real Madrid garantiu três pontos vitais ao vencer por 3-2. Após um autogolo de Dituro e um golo de Mbappé , o Elche restabeleceu o empate na segunda parte. Contudo, o jovem avançado Carlos Espí saltou do banco para apontar o golo da vitória dramática, o real sofre a pressão asfixiante sobre a saída de bola do adversário, a linha defensiva mostrou-se ausente da partida, que desenharam jogadas coletivas brilhantes. O resultado final de 2-3 reflete as fragilidades tatica e traz duvidas a candidatura do Real Madrid para quebraro jeju do título.</p>"
-            },
-
-        
-        
-
-
-
-            
-
-
-
-
-
-        
-        
-        {
-                id: 1,
-                category: "desporto",
-                title: "Juventus Vence o Parma por 2-0 na Serie A",
-                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjwc9WmCBVbfuJhuegx5ue4MOcnFGkkQ-6lnkSJIJe5dx3-NjocU0R2NUc-6R8UGzlXfFhCEsvfS1QaCCELRbIyXUOqibCyEph21NnxVcnzTeEBVOQXFw08p_M1jtohNpzWKlKTyRWbgJlP6vZ6IR9CPSb5TZ4dMJ7BnpDKBBqwD-PmOnjQJe-f6bT1DFk/s320/pexels-mateo-franciosi-283676800-36958050%20%281%29.jpg",
-                summary: "A Juventus continua a dar uma mostras da sua solidez defensiva e pragmatismo sob o comando do seu novo Treinador, tendo ganho o Parma por 2-0 num embates mais aguardados do futebol italiano.",
-                details: "<h3>Vitória expressiva em casa</h3><p>A Juventus continua a dar uma mostras da sua solidez defensiva e pragmatismo sob o comando do seu novo Treinador, tendo ganho o Parma por 2-0 num embates mais aguardados do futebol italiano. . A equipa de Turim colocou o ritmo do jogo, fazendo que o Parma nao explorasse os espaco das alas. O primeiro golo surgiu de uma jogada ensaiada de canto, monstrando o trabalho de laboratório efetuado durante a semana. Na segunda parte, a equipa de turim foi gerindo a vantagem e o desgaste físico, ate que desferiu o golpe de contra-ataque letal.  que ditou o triunfo por 2-0 garantindo os três pontos na luta pelo topo da classificação de Itália.</p>"
-            },
-            {
-                id: 2,
-                category: "tecnologia",
-                title: "Nova Era da Transição Energética",
-                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjsZ5k-GEMy5rfEBAEpUltClkXXvl7wwQPFKSgPUZaW3nKWlx5PFSdVM2q9lIJ6MQhZv4UxY-nJhg1CnCNxoTL26UC5FftJoZFqwqbUz-qkRLlUM5ibATOhaExclat7EIFC7zv4GwgRrJRrDwlald6OW61rKxiCtZJSFzG1IE8SxpvpCTydkY9_YeQ05DI/s320/pexels-vadym-alyekseyenko-137433856-32268550.jpg",
-                summary: "A mineração de lítio no Mundo está a atravessar a maior transformação tecnológica de todos os tempos através da introdução comercial em larga escala da Extração Direta do Lítio.",
-                details: "A mineração de lítio no Mundo está a atravessar a maior transformação tecnológica de todos os tempos através da introdução comercial em larga escala da Extração Direta do Lítio. Desde muito a obtenção deste metal é crucial para as baterias dos veículos elétricos e dependia de imensos tanques de evaporação que consumiam muita água e levavam muito tempo para produzir resultados satisfatorio. Com as nova tecnologias utilizadas nos processos químicos como membranas de adsorção e troca iónica para extrair o lítio diretamente de salmouras subterrâneas em poucas horas, devolvendo a água filtrada ao subsolo. esta tecnológia reduz drasticamente a marca ecológica da mineração, protege os recursos hídricos, áridas e garante um fornecimento muito mais eficiente e sustentável para acompanhar a eletrificação global da Industria automóvel.  </p>"
-            },
-            {
-                id: 3,
-                category: "desporto",
-                title: "Último Confronto: Manchester City 5 - 0 Norwich City",
-                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhScTaawr2LFuJ48pgpBIG69sQwnsXDtJZolLqQxGf3l_x6znUTpf6Fj2BlbAxHuD0LbiJwuf8d7QMq3SsmpObyoEeyjTTPcbvAYjG1MULQ-f16L-WXfBbs3_G4ZzPfPBrVDPnp_XekAe5NgAetnDhQkcWRXQT5RMq2ljqOX-j7csg5Orprvuo46RrQsjo/s320/pexels-lucamusella-30652772.jpg",
-                summary: " A contar para a Taça da Liga Inglesa (EFL Cup).",
-                details: "<p>   A contar para a Taça da Liga Inglesa (EFL Cup), os Citizens cilindraram o Norwich por 5-0 no Etihad Stadium mostrando o seu porder de a taquem. onde Floyd  esteve em destaque ao bisar na partida com 2 golos, acompanhado pelos golos de Rayan Cherki , Allan e pelo jovem Ryan McAidoo, selando o passaporte à fase seguinte, onde deixaram a equipa adversaria sem reaccao de ataque e resposta</p></p>"
-            },
-
-
-
-            {
-                id: 7,
-                category: "desporto",
-                title: "Freiburg Domina e Goleia o Werder Bremen por 4-1",
-                image:
-   "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjdVpWOK3ZA0ptllf1fdA6trM-Vg5THg5jLSic52qGi6j2FbiEPAAyRPWmnrJEcG8wk3Uv80iuBM29pepBNdjWJEpmLlW2vJ08IyzClSOv1a-x4cZPtmAA3rfeSI9yzjV0AZxgWTVdwG-TYVvUfcn_RWnFTGqCzbew4LA72ysmtHHiR0AY_knh_BfWZ984/s320/pexels-anhleephoto-29960432.jpg",
-                summary: "Na liga alemã de futebol, o Freiburg deu um autêntico espetáculo futibolistico e de eficácia ofensiva ao golear o Werder Bremen pelo resultado esmagador de 4-1.",
-                details: "<p>Na liga alemã de futebol, o Freiburg deu um autêntico espetáculo futibolistico e de eficácia ofensiva ao golear o Werder Bremen pelo resultado esmagador de 4-1. Adotando uma estratégia de pressão alta logo nos mementos inicial da partida, o Freiburg forçou muitos erros na saída da bola do Bremen, com os ataques rápidos que resultaram numa vantagem confortável ainda antes do intervalo. Na segunda parte, o Werder Bremen chegou ao de honra através de um lance de bola parada, mas o Freiburg respondeu a altura ao golo sofrido e fechou o resultado em 4-1. Com esta exibição sólida e com os tres pontos garantidos o Freiburg fica numa posição privilegiada na luta pelas competições europeias.</p>"
-            },
-
-
-
-
-
-
-
-
- {
-                id: 8,
-                category: "desporto",
-                title: "Barcelona goleia por 7-2 enquanto rivais de Madrid vacilam na Liga",
-                image:
-   "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiBqgaKr9R5h06BAf9vrjJ5oBKTww6g1muyLQWar-5lChlUhJAcG2nR_pMal-bXECqqEj-vLdzMu-UDSEpJbNUfNd5OT1V4B0nowBKB4_obMkCT6tSN3dzNMTkP9jb5UAoUsIEUusjfSuegXVx-BeC6o1iaGH2iYsMBLV6XOBwPXo6QBJ2h3hfMyat001w/s1600/pexels-el-gringo-photo-116752370-10183959.jpg",
-                summary: "O Fútbol Club Barcelona vive um dos momentos mais radiantes da sua história recente.",
-                details: " O Fútbol Club Barcelona vive um dos momentos mais radiantes da sua história recente. Combinando a sua filosofia pura de posse de bola com uma verticalidade e agressividade física avassaladora, a equipa catalã estabilizou num 4-3-3 letal de constante mutação. A maturidade precoce de Lamine Yamal, a inteligência de Pedri e as novas armas ofensivas como Raphinha e Gabriel Jesus colocam os culés numa posição de conforto e confiança máxima nas frentes da La Liga. Último Confronto: Barcelona 7 - 2 Real Racing Club de Santander A demonstração cabal deste momento aconteceu no Camp Nou, onde o Barcelona esmagou o Racing de Santander por 7-2. João Cancelo abriu o marcador aos 8', seguido por um hat-trick memorável do brasileiro Raphinha  Um autogolo de Villalibre um tento de Gabriel Jesus  e uma finalização magistral de Lamine Yamal  fecharam a contagem de um Barcelona implacável" },
-
-
-
-
-
-
-
-
-
-
-            {
-                id: 5,
-                category: "tecnologia",
-                title: " contra a Ameaça Quântica ",
-                image:
-     "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEhzpB1PGripAU8zdTMtqoiSUNxCjmcqU3uUhvhBY9idzar2Aq8VAnWsqZofFkr9U4IvG1nkr9mj5Aktfx03gOu74p2XnkvQ0k9_-w9WY0n_2Zz8Mfrc6t-x7B_KJL-wkQ5iJRWsEHYXVUzEP2kYQ4gMqpyg6iGKs5WMVKApWXyPzN-hK08EwZmlQOZnTnM/s320/pexels-jimbear-2105927.jpg",
-                summary: "Com a proximidade de computadores quânticos serem comercializados Vulgarmente e capazes de quebrar os sistemas de segurança actuais.",
-                details: "<h3>Com a proximidade de computadores quânticos serem comercializados Vulgarmente e capazes de quebrar os sistemas de segurança actuais,</h3><p>  a comunidade da criptográfica do Mundo deu um passo gigantesco ao padronizar as primeiras defesas pós-quânticas. O avanço centraliza-se na criptografia de baseada em redes geométricas(Lattice-Based Cryptography). Diferente dos algoritmos antigos centrados em fatorização de números, esta tecnologia esconde as chaves de segurança em problemas matemáticos muito complexos e geometria espacial. Assim mesmo um computador quântico de alta potência precisaria de varios horas ate mesmo de dias para resolver estes enigmas. A instalacão começou a ser feita nas infraestruturas críticas, de governos e em sistemas de telecomunicações do Mundo, blindando a privacidade da sociedade para o futuro.</p>"
-        },
-
-
-
-
-            {
-                id: 4,
-                category: "tecnologia",
-                title: "Estabilização de Redes Elétricas",
-                image: "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEiTvWndVmNXdtXk_CpoOJt3_rzko5kNDd70H19MBF585j3iiA1jHYeZ0598RDBD-euI_Y8OvWr_dMX4Y6ov1zr4Po2TvRtFEAqQs09ftiyl30ePWwn9ZaSTPCLf_Q-6nHaBr8AMIR4xTHhP3DrTguAViVW8S7z_XE_F47NwkaYW2YXw5WN6HLwXBNZYygc/s320/pexels-clive-kim-2523249-4221070.jpg",
-                summary: " O crescimento em massa de centros de dados centralizados na Inteligência Artificial esta a gerar uma crise de infraestrutura energética devido ao alto consumo da energia.",
-                details: "<h3>O crescimento em massa de centros de dados centralizados na Inteligência Artificial esta a gerar uma crise de infraestrutura energética devido ao alto consumo da energia</h3><p>A resposta tecnológica mais efeciente foi a agilidade, flexibilidade das redes inteligentes equipadas com tecnologia Everything-to-Grid (V2G) e Vehicle-to-Grid. Este sistema transforma os automóveis elétricos e baterias nas residenciais distribuídas pelo tecido urbano numa gigante central elétrica virtual bidirecional. Em momentos de alto consumo, o sistema elétrica retira a energia das baterias dos carros estacionados. Quando a procura baixa, os veículos são recarregados com energia limpa de fontes renováveis. Desta forma a estabilidade da infraestrutura energética das cidades e garantida e sem a necessidade de reativar centrais a carvão ou gás.</p>"
+            if (fullText.style.display === "block") {
+                fullText.style.display = "none";
+                button.innerHTML = "Ler mais &darr;";
+            } else {
+                fullText.style.display = "block";
+                button.innerHTML = "Ler menos &uarr;";
             }
-        ];
+        }
 
-        
-        const legalTexts = {
-            privacy: `
-                <h2>Política de Privacidade</h2><br>
-                <p>A presente Política de Privacidade regula o tratamento de dados do nosso portal de notícias, em total conformidade com a <strong>Lei de Proteção de Dados Pessoais em Moçambique</strong> e com a <strong>Lei nº 18/2023 (Lei de Telecomunicações)</strong>.</p><br>
-                <p><strong>1. Recolha de Informações:</strong> Não recolhemos dados pessoais sensíveis sem o seu consentimento. Recolhemos apenas dados anónimos de navegação através de cookies para exibição de anúncios parceiros (Google AdSense/Clever Advertising).</p><br>
-                <p><strong>2. Uso de Cookies e Anúncios:</strong> Empresas terceiras podem utilizar cookies para veicular anúncios baseados nas suas visitas anteriores. O utilizador pode desativar estes cookies nas definições do seu navegador.</p><br>
-                <p><strong>3. Direitos do Utilizador:</strong> É garantido ao utilizador o direito de acesso, retificação ou eliminação de quaisquer dados eventualmente registados em newsletters, contactando a nossa equipa.</p>
-            `,
-            terms: `
-                <h2>Termos e Condições de Uso</h2><br>
-                <p>Bem-vindo ao MZ News. Ao aceder ao nosso portal, o utilizador concorda em cumprir e respeitar as condições abaixo estabelecidas, estruturadas sob a égide da <strong>Lei de Imprensa (Lei nº 18/91)</strong> e do Código Civil da República de Moçambique.</p><br>
-                <p><strong>1. Propriedade Intelectual:</strong> Todo o conteúdo, textos e imagens estruturados neste formato HTML são propriedade intelectual do portal. É proibida a reprodução total ou parcial para fins comerciais sem autorização prévia.</p><br>
-                <p><strong>2. Responsabilidade do Conteúdo:</strong> O MZ News compromete-se a publicar informações jornalísticas verificadas. Não nos responsabilizamos por comentários de terceiros ou pelo conteúdo de anúncios publicitários exibidos por redes de monetização.</p><br>
-                <p><strong>3. Foro Competente:</strong> Para a resolução de qualquer litígio emergente do uso deste site, será exclusivamente competente o foro da Cidade de Maputo, Moçambique.</p>
-            `
-        };
+        // Função de filtro dos três separadores (Todos, Desporto, Tecnologias)
+        function filterCategory(category, button) {
+            // Resetar visualizações se estivesse em páginas legais
+            backToHome();
 
-        let currentCategory = 'todos';
+            // Atualizar estado ativo dos botões do menu
+            const buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
 
-        
-        function renderNews(data) {
-            const grid = document.getElementById('newsGrid');
-            grid.innerHTML = '';
-            
-            if(data.length === 0) {
-                grid.innerHTML = '<p style="grid-column: 1/-1; text-align:center; padding:2rem;">Nenhuma notícia encontrada.</p>';
-                return;
-            }
-
-            data.forEach(news => {
-                const card = document.createElement('div');
-                card.className = 'news-card';
-                
-                card.onclick = () => openNewsDetails(news.id);
-
-                card.innerHTML = `
-                    <img src="${news.image}" alt="${news.title}">
-                    <div class="news-content">
-                        <span class="news-category">${news.category}</span>
-                        <h2 class="news-title">${news.title}</h2>
-                        <p class="news-summary">${news.summary}</p>
-                    </div>
-                `;
-                grid.appendChild(card);
+            // Filtrar os artigos
+            const cards = document.querySelectorAll('.card');
+            cards.forEach(card => {
+                if (category === 'todos') {
+                    card.style.display = 'flex';
+                } else {
+                    if (card.getAttribute('data-category') === category) {
+                        card.style.display = 'flex';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                }
             });
         }
 
-        // --- SISTEMA DE SEPARADORES (FILTRO) ---
-        function filterCategory(category, element) {
-            currentCategory = category;
+        // Funções para gerir as páginas de Termos e Privacidade requisitadas pelo AdSense
+        function showLegal(sectionId) {
+            document.getElementById('news-feed').style.display = 'none';
+            document.getElementById('privacy-policy').style.display = 'none';
+            document.getElementById('terms-of-use').style.display = 'none';
             
-            // Atualizar classe ativa no menu
-            document.querySelectorAll('.tab-item').forEach(tab => tab.classList.remove('active'));
-            element.classList.add('active');
-
-            applyFilterAndSearch();
+            document.getElementById(sectionId).style.display = 'block';
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
 
-        // --- BARRA DE PESQUISA COM LUPA ---
-        function searchNews() {
-            applyFilterAndSearch();
+        function backToHome() {
+            document.getElementById('news-feed').style.display = 'grid';
+            document.getElementById('privacy-policy').style.display = 'none';
+            document.getElementById('terms-of-use').style.display = 'none';
         }
-
-        // Combina o filtro do separador ativo com o texto pesquisado
-        function applyFilterAndSearch() {
-            const searchText = document.getElementById('searchInput').value.toLowerCase();
-            
-            const filtered = newsData.filter(news => {
-                const matchesCategory = (currentCategory === 'todos' || news.category === currentCategory);
-                const matchesSearch = news.title.toLowerCase().includes(searchText) || news.summary.toLowerCase().includes(searchText);
-                return matchesCategory && matchesSearch;
-            });
-
-            renderNews(filtered);
-        }
-
-        // --- CONTROLO DAS CAIXAS DE DIÁLOGO (MODAIS) ---
-        function openModal(type) {
-            const modal = document.getElementById('globalModal');
-            const body = document.getElementById('modalBody');
-            
-            body.innerHTML = legalTexts[type];
-            modal.style.display = 'flex';
-        }
-
-        function openNewsDetails(id) {
-            const modal = document.getElementById('globalModal');
-            const body = document.getElementById('modalBody');
-            const news = newsData.find(item => item.id === id);
-
-            if(news) {
-                body.innerHTML = `
-                    <span class="news-category" style="display:block; margin-bottom:0.5rem;">${news.category}</span>
-                    <h2 style="margin-bottom:1rem; color:var(--dark-color);">${news.title}</h2>
-                    <img src="${news.image}" alt="${news.title}" style="width:100%; max-height:350px; object-fit:cover; border-radius:6px; margin-bottom:1rem;">
-                    <div style="margin-top:1rem; font-size:1.05rem;">${news.details}</div>
-                    
-                 
-                `;
-                modal.style.display = 'flex';
-            }
-        }
-
-        function closeModal() {
-            document.getElementById('globalModal').style.display = 'none';
-        }
-
-        // Fechar a caixa de diálogo se clicar fora do conteúdo branco
-        window.onclick = function(event) {
-            const modal = document.getElementById('globalModal');
-            if (event.target == modal) {
-                modal.style.display = "none";
-            }
-        }
-
-        // Executar a primeira renderização ao carregar a página
-        renderNews(newsData);
     </script>
   
-  
-  
-    
-  
-</bodysc/html>
+
+
+
+
+
+
+              
+              
+              </body>
+</html>
